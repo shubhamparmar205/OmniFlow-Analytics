@@ -21,7 +21,6 @@
 - [Project Structure](#-project-structure)
 - [Academic Context & Course Outcomes (COs)](#-academic-context--course-outcomes-cos)
 - [Roadmap](#-roadmap)
-- [License](#-license)
 
 ---
 
@@ -149,6 +148,3 @@ To solve issues associated with hyper-dense data overlays, the project implement
 - [ ] Connect a live historical `PostgreSQL` database cluster.
 - [ ] Incorporate live Weather API data fetches.
 - [ ] Reconfigure prediction endpoints to parse batch JSON arrays.
-
-## 📄 License
-Distributed fully under the MIT License. See `LICENSE` for more explicit information.
