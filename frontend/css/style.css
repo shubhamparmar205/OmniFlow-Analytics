@@ -1,0 +1,427 @@
+/* =========================================================================
+   1. CORE VARIABLES & SETUP
+   ========================================================================= */
+   :root {
+    --bg-dark: #05050f;
+    --card-bg: rgba(13, 14, 33, 0.65);
+    --card-border: rgba(94, 98, 255, 0.2);
+    --neon-blue: #00f3ff;
+    --neon-purple: #bc13fe;
+    --neon-red: #ff2a2a;
+    --text-primary: #e0e5ff;
+    --text-muted: #7b84b5;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+}
+
+/* Hard-lock body to 100vh to ensure it acts like an app, no overall scrolling */
+body {
+    background-color: var(--bg-dark);
+    background-image: 
+        radial-gradient(circle at 15% 50%, rgba(188, 19, 254, 0.08), transparent 25%),
+        radial-gradient(circle at 85% 30%, rgba(0, 243, 255, 0.08), transparent 25%);
+    color: var(--text-primary);
+    overflow: hidden;
+    height: 100vh;
+}
+
+/* =========================================================================
+   2. MAIN DASHBOARD CSS GRID ARCHITECTURE
+   ========================================================================= */
+.dashboard-layout {
+    display: grid;
+    grid-template-rows: 50px 1fr 25px;
+    grid-template-columns: 320px 1fr;
+    height: 100vh;
+}
+
+/* =========================================================================
+   3. HEADER & FOOTER
+   ========================================================================= */
+.top-header {
+    grid-column: 1 / -1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    background: rgba(0,0,0,0.5);
+    border-bottom: 1px solid var(--card-border);
+    backdrop-filter: blur(10px);
+    z-index: 10;
+}
+
+.logo {
+    font-weight: 800;
+    letter-spacing: 2px;
+    font-size: 1.2rem;
+}
+
+.glow-text {
+    color: var(--neon-blue);
+    text-shadow: 0 0 10px rgba(0, 243, 255, 0.6);
+}
+
+.status-panel {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    font-family: 'Share Tech Mono', monospace;
+}
+
+.online-indicator {
+    width: 8px;
+    height: 8px;
+    background-color: #00ff88;
+    border-radius: 50%;
+    box-shadow: 0 0 8px #00ff88;
+    animation: blink 2s infinite;
+}
+
+@keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+
+.telemetry-footer {
+    grid-column: 1 / -1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 25px;
+    background: rgba(2, 2, 5, 0.9);
+    border-top: 1px solid rgba(0, 243, 255, 0.4);
+    box-shadow: 0 -3px 15px rgba(0, 243, 255, 0.1);
+    font-size: 0.75rem;
+    color: var(--text-muted);
+}
+
+.footer-left {
+    font-family: 'Inter', sans-serif;
+}
+
+.highlight-name {
+    color: var(--neon-purple);
+    font-weight: 600;
+}
+
+.footer-center {
+    font-family: 'Share Tech Mono', monospace;
+    letter-spacing: 1px;
+    color: #a0a5cc;
+}
+
+.footer-right {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'Share Tech Mono', monospace;
+    color: var(--neon-blue);
+    font-weight: bold;
+}
+
+/* =========================================================================
+   4. SIDEBAR (CONTROL PANEL)
+   ========================================================================= */
+.sidebar-control {
+    background: rgba(8, 8, 20, 0.8);
+    border-right: 1px solid var(--card-border);
+    padding: 25px 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.panel-title {
+    font-size: 0.9rem;
+    color: var(--neon-purple);
+    letter-spacing: 3px;
+    margin-bottom: 10px;
+}
+
+.panel-divider {
+    border: 0;
+    height: 1px;
+    background: linear-gradient(90deg, var(--neon-purple), transparent);
+    margin-bottom: 25px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    letter-spacing: 1px;
+}
+
+.datetime-wrapper {
+    display: flex;
+    gap: 10px;
+    width: 100%;
+}
+
+.datetime-wrapper input {
+    flex-grow: 1;
+}
+
+input, select {
+    background: rgba(0, 0, 0, 0.4);
+    border: 1px solid #1f2347;
+    color: #fff;
+    padding: 12px;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    outline: none;
+    transition: 0.3s;
+}
+
+input:focus, select:focus {
+    border-color: var(--neon-blue);
+    box-shadow: 0 0 10px rgba(0, 243, 255, 0.2);
+}
+
+.icon-btn {
+    background: rgba(0, 0, 0, 0.4);
+    border: 1px solid #1f2347;
+    color: var(--neon-blue);
+    padding: 0 15px;
+    border-radius: 6px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.icon-btn:hover {
+    background: rgba(0, 243, 255, 0.1);
+    box-shadow: 0 0 10px rgba(0, 243, 255, 0.2);
+    border-color: var(--neon-blue);
+}
+
+.event-toggle {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 15px;
+}
+
+.event-toggle label {
+    margin-bottom: 0; /* Fixes vertical misalignment */
+}
+
+.event-toggle input[type="checkbox"] {
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+    accent-color: var(--neon-blue);
+    margin: 0;
+}
+
+.execute-btn {
+    width: 100%;
+    display: block;
+    text-align: center;
+    margin-top: auto;
+    background: transparent;
+    color: var(--neon-blue);
+    border: 1px solid var(--neon-blue);
+    padding: 15px;
+    border-radius: 6px;
+    text-transform: uppercase;
+    font-weight: 600;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: inset 0 0 10px rgba(0, 243, 255, 0.1);
+}
+
+/* Loading state logic for button */
+.execute-btn:hover:not(:disabled) {
+    background: rgba(0, 243, 255, 0.1);
+    box-shadow: 0 0 15px rgba(0, 243, 255, 0.4), inset 0 0 15px rgba(0, 243, 255, 0.2);
+}
+
+.execute-btn:disabled {
+    border-color: #555;
+    color: #888;
+    box-shadow: none;
+    cursor: not-allowed;
+}
+
+/* =========================================================================
+   5. ANALYTICS GRID (MAIN AREA)
+   ========================================================================= */
+.analytics-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1.2fr;
+    gap: 20px;
+    padding: 20px;
+    overflow-y: auto;
+}
+
+.glass-card {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    backdrop-filter: blur(12px);
+    border-radius: 12px;
+    padding: 20px;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.glass-card h3 {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--text-muted);
+    margin-bottom: 20px;
+    border-left: 3px solid var(--neon-blue);
+    padding-left: 10px;
+}
+
+.card-a { grid-column: 1 / 2; grid-row: 1 / 2; justify-content: center; align-items: center; text-align: center; }
+.card-c { grid-column: 2 / 3; grid-row: 1 / 2; }
+.card-b { grid-column: 1 / 3; grid-row: 2 / 3; }
+
+.prediction-container {
+    opacity: 0.1; /* Starts dim until solved */
+    transition: opacity 0.5s ease;
+}
+
+.giant-numbers {
+    font-size: 5rem;
+    font-weight: 800;
+    color: #fff;
+    text-shadow: 0 0 20px var(--neon-purple);
+    font-family: 'Share Tech Mono', monospace;
+    line-height: 1;
+}
+
+.sub-text {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    margin: 10px 0;
+}
+
+.delta-text {
+    font-size: 1.1rem;
+    color: #00ff88;
+    font-weight: 600;
+}
+
+.chart-container {
+    flex-grow: 1;
+    position: relative;
+    opacity: 0.1;
+    transition: opacity 0.5s ease;
+}
+
+.impact-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 15px;
+    flex-grow: 1;
+    opacity: 0.1; /* Starts hidden */
+    transition: opacity 0.5s ease;
+    padding: 0 10px;
+}
+
+.impact-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 1.1rem;
+    font-family: 'Share Tech Mono', monospace;
+    letter-spacing: 1px;
+}
+
+.impact-divider {
+    border: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--neon-blue), transparent);
+    margin: 5px 0;
+}
+
+.total-row {
+    font-size: 1.5rem;
+    font-weight: 800;
+}
+
+/* Mathematical Highlighting Colors */
+.highlight-neutral { color: #a0a0a0; }
+.highlight-danger { color: var(--neon-red); }
+.highlight-warning { color: #ffbc00; }
+.highlight-positive { color: #00ff88; }
+
+/* =========================================================================
+   6. MICRO-INTERACTIONS & ANIMATIONS
+   ========================================================================= */
+
+/* The laser scanner that sweeps across cards when loading */
+.laser-scanner {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: linear-gradient(180deg, transparent, rgba(0, 243, 255, 0.1), transparent);
+    transform: translateY(-100%);
+    pointer-events: none;
+    z-index: 5;
+    display: none; /* Hidden by default */
+}
+
+/* Class injected by Javascript upon button click */
+.is-scanning .laser-scanner {
+    display: block;
+    animation: scanLine 1.2s infinite linear;
+}
+
+@keyframes scanLine {
+    0% { transform: translateY(-100%); }
+    100% { transform: translateY(100%); }
+}
+
+/* When complete, we fade the components into full viewing mode */
+.resolved .prediction-container, 
+.resolved .chart-container, 
+.resolved .impact-container {
+    opacity: 1;
+}
+
+/* Leaflet overriding for glowing pulses */
+.pulse-marker-active {
+    border-radius: 50%;
+    background: var(--neon-red);
+    box-shadow: 0 0 0 rgba(255, 42, 42, 0.7);
+    animation: radarPulse 1.5s infinite;
+}
+
+@keyframes radarPulse {
+    0% { box-shadow: 0 0 0 0 rgba(255, 42, 42, 0.7); transform: scale(0.9); }
+    70% { box-shadow: 0 0 0 15px rgba(255, 42, 42, 0); transform: scale(1.1); }
+    100% { box-shadow: 0 0 0 0 rgba(255, 42, 42, 0); transform: scale(0.9); }
+}
+
+/* =========================================================================
+   7. RESPONSIVENESS OVERRIDES (If viewed on mobile horizontally)
+   ========================================================================= */
+@media screen and (max-width: 1024px) {
+    .dashboard-layout {
+        display: flex;
+        flex-direction: column;
+        height: auto;
+        overflow: auto;
+    }
+    .sidebar-control { border-bottom: 2px solid var(--neon-purple); border-right: none; }
+    .analytics-grid { display: flex; flex-direction: column; }
+    .card-a, .card-b, .card-c { min-height: 350px; }
+}

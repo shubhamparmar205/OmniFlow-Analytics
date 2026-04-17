@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OmniFlow Analytics</title>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    
+    <!-- Chart.js Graphing Library (CDN) -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="dashboard-layout">
+        <header class="top-header">
+            <div class="logo">
+                <span class="glow-text">OMNIFLOW</span> Analytics
+            </div>
+            <div class="status-panel">
+                <div class="online-indicator"></div>
+                <span class="status-text">SYSTEM ONLINE</span>
+                <span id="digital-clock" class="digital-clock">00:00:00</span>
+            </div>
+        </header>
+
+        <aside class="sidebar-control">
+            <h2 class="panel-title">CONTROL PANEL</h2>
+            <hr class="panel-divider">
+            <form id="prediction-form">
+                <div class="form-group">
+                    <label>Target Date & Time</label>
+                    <div class="datetime-wrapper">
+                        <input type="datetime-local" id="timestamp" required>
+                        <button type="button" id="calendar-icon-btn" class="icon-btn" title="Open Calendar">📅</button>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Meteorological Conditions</label>
+                    <select id="weather" required>
+                        <option value="Clear">Clear Sky</option>
+                        <option value="Cloudy">Cloud Cover</option>
+                        <option value="Rain">Precipitation (Rain)</option>
+                        <option value="Snow">Snowstorm</option>
+                    </select>
+                </div>
+                <div class="form-group event-toggle">
+                    <label>Special Mass Gathering / Event?</label>
+                    <input type="checkbox" id="events">
+                </div>
+                <button type="submit" id="execute-btn" class="execute-btn">Run Predictive Model</button>
+            </form>
+        </aside>
+
+        <main class="analytics-grid">
+            
+            <div class="glass-card card-a skeleton-ready">
+                <div class="laser-scanner"></div>
+                <h3>LIVE PREDICTION MODEL OUTPUT</h3>
+                <div class="prediction-container">
+                    <div id="volume-display" class="giant-numbers">---</div>
+                    <div class="sub-text">Estimated Vehicles / Hour</div>
+                    <div id="delta-display" class="delta-text">+0.0% vs Baseline</div>
+                </div>
+            </div>
+            
+            <!-- OPTION 1 LOGIC FEATURE: AI INTERROGATION -->
+            <div class="glass-card card-c skeleton-ready">
+                <div class="laser-scanner"></div>
+                <h3>AI DECISION IMPACT ANALYSIS</h3>
+                <div class="impact-container">
+                    <div class="impact-row">
+                        <span class="impact-label">Base Temporal Volume:</span>
+                        <span id="base-vol" class="impact-val highlight-neutral">---</span>
+                    </div>
+                    <div class="impact-row">
+                        <span class="impact-label">Weather Logic Penalty:</span>
+                        <span id="weather-val" class="impact-val highlight-neutral">---</span>
+                    </div>
+                    <div class="impact-row">
+                        <span class="impact-label">Event Logic Penalty:</span>
+                        <span id="event-val" class="impact-val highlight-neutral">---</span>
+                    </div>
+                    <hr class="impact-divider">
+                    <div class="impact-row total-row">
+                        <span class="impact-label">Final Computed Vol:</span>
+                        <span id="total-val" class="impact-val glow-text">---</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="glass-card card-b skeleton-ready">
+                <div class="laser-scanner"></div>
+                <h3>24-HOUR CONGESTION FORECAST</h3>
+                <div class="chart-container">
+                    <canvas id="forecastChart"></canvas>
+                </div>
+            </div>
+
+        </main>
+
+        <footer class="telemetry-footer">
+            <div class="footer-left">
+                Machine Learning Project
+            </div>
+            <div class="footer-center">
+                Active Engine: XGBoost Regressor | Dataset: Traffic_Vol_v2.csv
+            </div>
+            <div class="footer-right">
+                <div class="online-indicator"></div>
+                Local API: Online | Latency: <span id="telemetry-latency">24ms</span>
+            </div>
+        </footer>
+    </div>
+
+    <script src="js/app.js"></script>
+</body>
+</html>

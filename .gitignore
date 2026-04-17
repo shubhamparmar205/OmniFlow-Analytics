@@ -1,0 +1,42 @@
+# Virtual Environments
+venv/
+env/
+.env
+.venv/
+
+# Python Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Testing and Caching
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+.mypy_cache/
+.ruff_cache/
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# IDEs and Editors
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Temporary Data / Logs
+*.log
+tmp/
+*.sqlite3
+
+# Note: We are explicitly ALLOWING traffic_model.joblib to be tracked by Git 
+# so that the repository works instantly out-of-the-box for evaluators cloning it.
