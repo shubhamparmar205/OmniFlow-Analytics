@@ -412,16 +412,87 @@ input:focus, select:focus {
 }
 
 /* =========================================================================
-   7. RESPONSIVENESS OVERRIDES (If viewed on mobile horizontally)
+   7. RESPONSIVENESS OVERRIDES & MOBILE UX PATCH
    ========================================================================= */
+
+/* GLOBAL MOBILE BASELINE: Viewport Scroll Lock & Overflow Prevention */
 @media screen and (max-width: 1024px) {
+    html, body {
+        /* Override 100vh lock to allow vertical scrolling on mobile */
+        height: auto !important;
+        min-height: 100dvh;
+        overflow-y: auto !important;
+        
+        /* Strictly forbid horizontal scrolling */
+        overflow-x: hidden !important;
+        
+        /* Scale down base font size to prevent overlapping components */
+        font-size: 14px;
+    }
+
+    /* TEXT TRUNCATION FAIL-SAFE: Ensure long labels drop down instead of slicing out of viewport */
+    * {
+        overflow-wrap: break-word;
+        word-wrap: break-word;
+        white-space: normal;
+    }
+
+    /* GRID-TO-STACK TRANSFORMATION: Break standard layout grid */
     .dashboard-layout {
         display: flex;
         flex-direction: column;
         height: auto;
-        overflow: auto;
+        width: 100%;
+        overflow-x: hidden;
     }
-    .sidebar-control { border-bottom: 2px solid var(--neon-purple); border-right: none; }
-    .analytics-grid { display: flex; flex-direction: column; }
-    .card-a, .card-b, .card-c { min-height: 350px; }
+
+    /* Push control panel above analytics */
+    .sidebar-control { 
+        width: 100% !important;
+        border-bottom: 2px solid var(--neon-purple); 
+        border-right: none; 
+    }
+    
+    /* ANALYTICS STACK: Convert sub-grid to full-width flexible column */
+    .analytics-grid { 
+        display: flex; 
+        flex-direction: column; 
+        width: 100%;
+        padding: 10px; /* Compress padding to save screen real estate */
+        gap: 15px;
+    }
+
+    .glass-card {
+        width: 100% !important;
+    }
+
+    /* Feature Reset: Remove hard constraints so cards size organically */
+    .card-a, .card-b, .card-c { min-height: auto; }
+
+    /* RIGID ASSET CONTAINMENT: Force Canvas and inner layout tracks to obey screen limits */
+    canvas, .chart-container, .impact-row {
+        max-width: 100% !important;
+    }
+}
+
+/* SMARTPHONE TARGETING */
+@media screen and (max-width: 768px) {
+    /* Extreme Mobile Constraints: Tweak sizes specifically for vertical smartphone screens */
+    .giant-numbers {
+        font-size: 3.5rem; /* Shrink glowing vehicle volume output */
+    }
+
+    .top-header {
+        flex-direction: column;
+        padding: 15px;
+        gap: 10px;
+        text-align: center;
+    }
+
+    .telemetry-footer {
+        flex-direction: column;
+        padding: 15px;
+        gap: 10px;
+        text-align: center;
+    }
 }
