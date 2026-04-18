@@ -40,4 +40,4 @@ Finalizing the environment properties for public open-source distribution.
 ## Phase 7: Responsive Mobile Scaling & Absolute Path Architecture
 The final structural adjustments guaranteeing stability across divergent operating systems and extreme hardware form-factors.
 * **Linux Container Target Fixes**: Reprogrammed Uvicorn `/frontend` routing strings via native Python `pathlib: __file__` mathematical traversal. Guarantees 100% mounting reliability across unknown Linux container pathways mapping from AWS/Render root boundaries.
-* **Fluid DOM Mechanics**: Stripped rigid `100vh` scroll-locks exclusively for smartphones and narrow-tablet environments. Overrode `dashboard-layout` grid constraints with pure `flex-direction: column` block stacks containing responsive text wrapping logic.
+* **Fluid DOM Mechanics**: Eradicated "Single Page" scroll-locks globally, overriding base `height: 100vh` limits with responsive `min-height: 100vh` and dynamic `overflow-y: auto` parameters. Overrode `dashboard-layout` grid constraints with pure `flex-direction: column` block stacks containing responsive text wrapping logic, guaranteeing perfect fluid layouts on any screen.
