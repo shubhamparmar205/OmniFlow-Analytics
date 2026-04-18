@@ -149,7 +149,7 @@ document.getElementById('prediction-form').addEventListener('submit', async func
     let fetchError = false;
 
     try {
-        const response = await fetch('http://localhost:8000/predict', {
+        const response = await fetch('/predict', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(requestData)
@@ -165,7 +165,7 @@ document.getElementById('prediction-form').addEventListener('submit', async func
         cards.forEach(c => c.classList.remove('is-scanning'));
         
         if (fetchError) {
-            alert("Mission critical failure. Could not reach FastAPI Tensor on Port 8000.");
+            alert("Mission critical failure. Could not reach FastAPI Tensor Server.");
             btn.textContent = "Run Predictive Model";
             btn.disabled = false;
             return;
