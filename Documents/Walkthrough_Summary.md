@@ -72,3 +72,12 @@ docker build -t smart-traffic-ai:latest .
 ```bash
 docker run -d -p 8000:8000 smart-traffic-ai:latest
 ```
+
+---
+
+## 5. Source Code Access (GitHub)
+
+The final architecture of this Machine Learning project is deployed and actively synced to GitHub. 
+
+**Public Repository Address:**
+👉 **[https://github.com/shubhamparmar205/OmniFlow-Analytics](https://github.com/shubhamparmar205/OmniFlow-Analytics)**

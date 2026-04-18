@@ -27,7 +27,12 @@ async def startup_event():
 # 4. Attach the specific routes (URLs) from our API folder into the main application
 app.include_router(prediction_router)
 
+from pathlib import Path
 from fastapi.staticfiles import StaticFiles
 
-# 5. Serve the User Interface directly! Now you don't need a separate frontend server.
-app.mount("/", StaticFiles(directory="frontend", html=True), name="frontend")
+# 5. Dynamically resolve the absolute path to prevent Render/Linux deployment crashes
+BASE_DIR = Path(__file__).resolve().parent.parent
+FRONTEND_DIR = BASE_DIR / "frontend"
+
+# Serve the User Interface directly!
+app.mount("/", StaticFiles(directory=str(FRONTEND_DIR), html=True), name="frontend")
