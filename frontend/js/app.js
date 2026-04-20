@@ -12,7 +12,11 @@ updateClock();
 const dateInput = document.getElementById('timestamp');
 const now = new Date();
 now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
-dateInput.value = now.toISOString().slice(0, 16);
+const localISOString = now.toISOString().slice(0, 16);
+
+// Set default value and critically restrict the HTML5 DOM Calendar from selecting past dates
+dateInput.value = localISOString;
+dateInput.min = localISOString;
 
 // Calendar icon native popup trigger
 document.getElementById('calendar-icon-btn').addEventListener('click', () => {
@@ -119,6 +123,13 @@ const forecastChart = new Chart(ctx, {
    ========================================================== */
 document.getElementById('prediction-form').addEventListener('submit', async function(e) {
     e.preventDefault();
+    
+    // Explicit Javascript Fail-Safe: Terminate script payload immediately if operator bypasses HTML block 
+    const selectedDate = new Date(document.getElementById('timestamp').value);
+    if (selectedDate < new Date()) {
+        alert("SECURITY FAULT: Cannot forecast past events. Please explicitly select a future timestamp.");
+        return;
+    }
     
     const btn = document.getElementById('execute-btn');
     const cards = document.querySelectorAll('.skeleton-ready');
